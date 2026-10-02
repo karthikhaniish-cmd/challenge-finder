@@ -1,0 +1,319 @@
+<!-- Bundled Web App for Android Assets -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Challenge Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-brand">
+        <span class="brand-icon">🎯</span>
+        <span class="brand-text">Challenge<span class="brand-accent">Gen</span></span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link active" data-nav="home">Home</a>
+        <a href="#challenges" class="nav-link" data-nav="challenges">Challenges</a>
+        <a href="#daily" class="nav-link" data-nav="daily">Daily Challenge</a>
+        <a href="#stats" class="nav-link" data-nav="stats">Stats</a>
+        <a href="#history" class="nav-link" data-nav="history">History</a>
+        <a href="#about" class="nav-link" data-nav="about">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn theme-toggle" title="Toggle Theme" aria-label="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section id="home" class="page-section active">
+      <div class="hero-header">
+        <div class="hero-badge">⚡ Turn Boredom into Fun</div>
+        <h1 class="hero-title">🎯 Random Challenge Generator</h1>
+        <p class="hero-subtitle">“Feeling bored? Let fate choose your next challenge!”</p>
+        
+        <div class="quick-stats-pill">
+          <div class="stat-pill-item">
+            <span class="pill-icon">⭐</span>
+            <span class="pill-label">Score:</span>
+            <span id="quick-score" class="pill-val">0 pts</span>
+          </div>
+          <div class="stat-pill-divider"></div>
+          <div class="stat-pill-item">
+            <span class="pill-icon">🔥</span>
+            <span class="pill-label">Streak:</span>
+            <span id="quick-streak" class="pill-val">0 Days</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title-row">
+          <h3>Choose a Category</h3>
+          <span id="selected-category-label" class="selected-badge">🎲 Random</span>
+        </div>
+        <div class="category-grid" id="category-grid"></div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title-row">
+          <h3>Select Difficulty</h3>
+        </div>
+        <div class="difficulty-group" id="difficulty-group">
+          <button class="diff-btn active" data-diff="all">All Difficulties</button>
+          <button class="diff-btn" data-diff="easy">🟢 Easy (10-30 pts)</button>
+          <button class="diff-btn" data-diff="medium">🟡 Medium (30-70 pts)</button>
+          <button class="diff-btn" data-diff="hard">🔴 Hard (70-100 pts)</button>
+        </div>
+      </div>
+
+      <div class="generate-action-block">
+        <button id="generate-btn" class="btn btn-primary btn-large generate-btn">
+          <span class="btn-icon">🎯</span>
+          <span>Generate Challenge</span>
+        </button>
+      </div>
+
+      <div class="challenge-display-wrapper" id="challenge-display-wrapper">
+        <div id="loading-state" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p class="loading-text">Finding your challenge...</p>
+          <p class="loading-sub">Rolling the dice of fate 🎲</p>
+        </div>
+
+        <div id="challenge-card" class="challenge-card"></div>
+      </div>
+    </section>
+
+    <section id="challenges" class="page-section">
+      <div class="section-header">
+        <h2>Explore Challenge Vault</h2>
+        <p>Search over 100 safe, fun, and engaging random challenges.</p>
+      </div>
+
+      <div class="search-filter-card">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="challenge-search" class="search-input" placeholder="Search challenges by keyword, category, or title...">
+          <button id="clear-search-btn" class="clear-search-btn hidden">&times;</button>
+        </div>
+
+        <div class="filter-dropdowns">
+          <select id="filter-category" class="filter-select">
+            <option value="all">All Categories</option>
+            <option value="funny">😂 Funny</option>
+            <option value="brain">🧠 Brain</option>
+            <option value="fitness">💪 Fitness</option>
+            <option value="creative">🎨 Creative</option>
+            <option value="social">🎤 Social</option>
+            <option value="gaming">🎮 Gaming</option>
+            <option value="study">📚 Study</option>
+            <option value="dare">😈 Dare</option>
+            <option value="quick">⚡ Quick</option>
+          </select>
+
+          <select id="filter-difficulty" class="filter-select">
+            <option value="all">All Difficulties</option>
+            <option value="easy">🟢 Easy</option>
+            <option value="medium">🟡 Medium</option>
+            <option value="hard">🔴 Hard</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="challenge-list" class="challenge-list-grid"></div>
+      
+      <div id="search-empty-state" class="empty-state hidden">
+        <div class="empty-emoji">😕</div>
+        <h3>No Challenges Found</h3>
+        <p>Try tweaking your filters or search keywords.</p>
+        <button id="reset-search-btn" class="btn btn-secondary">Reset Filters</button>
+      </div>
+    </section>
+
+    <section id="daily" class="page-section">
+      <div class="section-header">
+        <span class="badge-pill gold-badge">🔥 Synchronized Daily</span>
+        <h2>🌟 Challenge of the Day</h2>
+        <p id="daily-date-label">Today's Featured Challenge</p>
+      </div>
+
+      <div class="daily-card-container">
+        <div id="daily-challenge-card" class="daily-card"></div>
+      </div>
+    </section>
+
+    <section id="stats" class="page-section">
+      <div class="section-header">
+        <h2>Your Adventure Statistics</h2>
+        <p>Check your score, streaks, and progress across all categories.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-meta">
+            <h4>Total Points</h4>
+            <div id="stats-total-points" class="stat-value">0</div>
+            <p>Score earned so far</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-meta">
+            <h4>Completed</h4>
+            <div id="stats-completed-count" class="stat-value">0</div>
+            <p>Challenges fulfilled</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-meta">
+            <h4>Current Streak</h4>
+            <div id="stats-current-streak" class="stat-value">0</div>
+            <p>Consecutive days</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">👑</div>
+          <div class="stat-meta">
+            <h4>Best Streak</h4>
+            <div id="stats-best-streak" class="stat-value">0</div>
+            <p>All-time record</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-progress-card">
+        <h3>Category Completion Progress</h3>
+        <p class="sub-text">Completed challenges by category domain</p>
+        <div id="category-progress-bars" class="progress-bars-container"></div>
+      </div>
+    </section>
+
+    <section id="history" class="page-section">
+      <div class="section-header-row">
+        <div>
+          <h2>Challenge History</h2>
+          <p>Chronological log of your completed challenges.</p>
+        </div>
+        <button id="clear-history-btn" class="btn btn-outline-danger">
+          <span>🗑 Clear History</span>
+        </button>
+      </div>
+
+      <div id="history-list" class="history-list"></div>
+
+      <div id="history-empty" class="empty-state hidden">
+        <div class="empty-emoji">📜</div>
+        <h3>No History Yet</h3>
+        <p>Complete challenges to start recording your personal journey!</p>
+      </div>
+    </section>
+
+    <section id="about" class="page-section">
+      <div class="section-header">
+        <h2>About ChallengeGen</h2>
+        <p>Spontaneous, safe, and fun micro-adventures at your fingertips.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">🎯</div>
+          <h3>What is ChallengeGen?</h3>
+          <p>ChallengeGen is designed to break monotony and turn downtime into creative, physical, or entertaining experiences. Whether alone or with friends, let serendipity pick what you do next!</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-icon">🛡</div>
+          <h3>Safety First Rules</h3>
+          <p>All 100+ challenges in ChallengeGen are designed to be safe, respectful, legal, and age-appropriate. No dangerous stunts or hazardous actions are ever included.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-icon">💾</div>
+          <h3>Local & Offline Friendly</h3>
+          <p>Your points, streak, and history are kept secure in your local browser storage. No account registration or external tracking is required.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="timer-modal" class="modal-backdrop hidden">
+    <div class="modal-card timer-modal-card">
+      <div class="modal-header">
+        <span class="modal-tag">⏱ CHALLENGE TIMER</span>
+        <button id="close-timer-btn" class="modal-close-btn">&times;</button>
+      </div>
+      
+      <div class="timer-challenge-info">
+        <h4 id="timer-title">Challenge Title</h4>
+        <p id="timer-desc">Challenge description goes here.</p>
+      </div>
+
+      <div class="timer-circle-wrap">
+        <svg class="timer-svg" viewBox="0 0 160 160">
+          <circle class="timer-bg-circle" cx="80" cy="80" r="70"></circle>
+          <circle id="timer-progress-circle" class="timer-fg-circle" cx="80" cy="80" r="70"></circle>
+        </svg>
+        <div class="timer-text-content">
+          <span id="timer-display" class="timer-digital">01:00</span>
+          <span id="timer-status-label" class="timer-status">Running</span>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+        <button id="timer-restart-btn" class="btn btn-secondary">🔄 Restart</button>
+        <button id="timer-toggle-btn" class="btn btn-primary">⏸ Pause</button>
+        <button id="timer-finish-btn" class="btn btn-success">✓ Finish</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="celebration-modal" class="modal-backdrop hidden">
+    <div class="modal-card celebration-modal-card">
+      <div class="celebration-emoji">🎉</div>
+      <h2>Challenge Complete!</h2>
+      <div class="reward-pill" id="celebration-reward-pill">+50 Points ⭐</div>
+      <p>Fantastic job! Keep going to elevate your streak and unlock master rank.</p>
+      <button id="celebration-close-btn" class="btn btn-primary btn-large">Awesome! 🚀</button>
+    </div>
+  </div>
+
+  <div id="confirm-modal" class="modal-backdrop hidden">
+    <div class="modal-card confirm-modal-card">
+      <h3>Clear Challenge History?</h3>
+      <p>Are you sure you want to clear your completion log? Your points and streak will remain safe.</p>
+      <div class="modal-actions">
+        <button id="cancel-confirm-btn" class="btn btn-secondary">Cancel</button>
+        <button id="accept-confirm-btn" class="btn btn-danger">Yes, Clear History</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>🎯 ChallengeGen • Fun & Safe Random Challenge Generator</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

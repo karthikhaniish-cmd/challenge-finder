@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer Target Ring -->
+    <path
+        android:strokeColor="#7C5CFC"
+        android:strokeWidth="4"
+        android:strokeAlpha="0.8"
+        android:fillColor="#00000000"
+        android:pathData="M 54,26 A 28,28 0 1,1 53.9,26 Z" />
+
+    <!-- Middle Target Ring -->
+    <path
+        android:strokeColor="#00D4FF"
+        android:strokeWidth="3.5"
+        android:fillColor="#00000000"
+        android:pathData="M 54,35 A 19,19 0 1,1 53.9,35 Z" />
+
+    <!-- Inner Bullseye -->
+    <path
+        android:fillColor="#FF5C8A"
+        android:pathData="M 54,44 A 10,10 0 1,1 53.9,44 Z" />
+
+    <!-- Central Center Dot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 54,50 A 4,4 0 1,1 53.9,50 Z" />
+
+    <!-- Diagonal Lightning Bolt -->
+    <path
+        android:fillColor="#FFD166"
+        android:pathData="M 64,28 L 48,54 L 56,54 L 44,80 L 68,50 L 58,50 Z" />
+
+    <!-- Spark Star Accent Top Right -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 76,28 L 78,33 L 83,35 L 78,37 L 76,42 L 74,37 L 69,35 L 74,33 Z" />
+
+    <!-- Spark Star Accent Bottom Left -->
+    <path
+        android:fillColor="#00D4FF"
+        android:pathData="M 32,70 L 33.5,73.5 L 37,75 L 33.5,76.5 L 32,80 L 30.5,76.5 L 27,75 L 30.5,73.5 Z" />
+</vector>

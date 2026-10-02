@@ -1,0 +1,6 @@
+{
+  "name": "Random Challenge Generator",
+  "description": "Generate fun random challenges with timers, points, streaks, categories, and celebrations!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

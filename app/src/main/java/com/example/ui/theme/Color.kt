@@ -1,0 +1,47 @@
+package com.example.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+// Dark Theme Colors (Primary style from design brief)
+val DarkBackground = Color(0xFF0B1020)
+val DarkSurface = Color(0xFF151B2F)
+val DarkSurfaceVariant = Color(0xFF1E2642)
+val DarkPrimary = Color(0xFF7C5CFC)
+val DarkOnPrimary = Color(0xFFFFFFFF)
+val DarkPrimaryContainer = Color(0xFF33206E)
+val DarkOnPrimaryContainer = Color(0xFFE3DCFF)
+val DarkSecondary = Color(0xFF00D4FF)
+val DarkOnSecondary = Color(0xFF003544)
+val DarkTertiary = Color(0xFFFFD166)
+val DarkOnTertiary = Color(0xFF422E00)
+val DarkTextPrimary = Color(0xFFFFFFFF)
+val DarkTextSecondary = Color(0xFFA7AEC4)
+val DarkError = Color(0xFFFF5C8A)
+
+// Light Theme Colors
+val LightBackground = Color(0xFFF3F5FC)
+val LightSurface = Color(0xFFFFFFFF)
+val LightSurfaceVariant = Color(0xFFE6EBF8)
+val LightPrimary = Color(0xFF6845EC)
+val LightOnPrimary = Color(0xFFFFFFFF)
+val LightPrimaryContainer = Color(0xFFEDE7FF)
+val LightOnPrimaryContainer = Color(0xFF24008F)
+val LightSecondary = Color(0xFF008BA8)
+val LightOnSecondary = Color(0xFFFFFFFF)
+val LightTertiary = Color(0xFFD48B00)
+val LightOnTertiary = Color(0xFFFFFFFF)
+val LightTextPrimary = Color(0xFF101426)
+val LightTextSecondary = Color(0xFF5E657D)
+val LightError = Color(0xFFBA1A1A)
+
+// Category Colors for Badges and Accents
+val FunnyColor = Color(0xFFFF8533)
+val BrainColor = Color(0xFF00D4FF)
+val FitnessColor = Color(0xFF2ED573)
+val CreativeColor = Color(0xFFFF4757)
+val SocialColor = Color(0xFF7C5CFC)
+val GamingColor = Color(0xFF9B51E0)
+val StudyColor = Color(0xFF2F80ED)
+val DareColor = Color(0xFFFF5252)
+val QuickColor = Color(0xFFFFD166)
+val RandomColor = Color(0xFF20BF6B)
